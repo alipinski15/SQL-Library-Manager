@@ -12,9 +12,17 @@ module.exports = (sequelize) => {
         }
       }      
     },
-    author: Sequelize.STRING,
+    author: {
+      type: Sequelize.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'The "Author" is required'
+        }
+      }
+    },
     genre: Sequelize.STRING,
     year: Sequelize.INTEGER
   }, {sequelize});
+
   return Book;
 };

@@ -16,11 +16,12 @@ function asyncHandler(cb){
   }
 }
 
-// router.get('/', asyncHandler(async (req, res) => {
-//   res.redirect("/index");
-// }));
+/*Get all book for index page. */
 
 router.get('/', asyncHandler(async (req, res) => {
-  const books = await Book.findAll({order: [["year", "DESC"]]})
-  res.render("books/index", { books: {}, title: "Library Manager" } );
+  const books = await Book.findAll({order: [["title", "DESC"]]})
+  res.render("books/index", { books, title: "Books" } );
 }));
+
+
+module.exports = router;
