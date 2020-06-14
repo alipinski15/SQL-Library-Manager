@@ -14,6 +14,10 @@ a {
     color: black;
   }
 
+.search input{
+  margin-left: 0px;
+}
+
 a.button, input[type=submit] {
   color: white;
   background: #019875;
@@ -25,7 +29,7 @@ a.button, input[type=submit] {
 }
 
 form a.button, input[type=submit] {
-  margin-left: 140px;
+  margin-left: 10px;
   transition: 0.4s;
 }
 
