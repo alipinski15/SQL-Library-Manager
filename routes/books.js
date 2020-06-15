@@ -1,4 +1,5 @@
 const express = require('express');
+const paginate = require('express-paginate')
 const router = express.Router();
 const Book = require('../models').Book;
 const { Op } = require('../models').Sequelize;
@@ -20,7 +21,7 @@ function asyncHandler(cb){
 // Add in search functionality
 
 router.post('/search', asyncHandler(async(req, res) => {
-  let search = true;
+  let search = false;
   if(search === true){
     const books = await Book.findAll({
       where: {
@@ -40,18 +41,29 @@ router.post('/search', asyncHandler(async(req, res) => {
         }
       }
     })
-    res.render("books/index", { books })
+    res.render("books/search", { books, title: "SQL Library" })
   } else {
-    res.render("books/book-not-found")
+    res.render("books/book-not-found", { title: " SQL Library"})
   }
-  
 }));
 
-/*Get all book for index page. */
+/*Get all book for index page. Add pagination links based on 10 books per page.
+ Code referenced from https://www.npmjs.com/package/express-paginate */
 
 router.get('/', asyncHandler(async (req, res) => {
-  const books = await Book.findAll({order: [["title", "DESC"]]})
-  res.render("books/index", { books, title: "SQL Library" } );
+  const books = await Book.findAndCountAll({
+    limit: req.query.limit,
+    offset: req.skip,
+    order: [["title", "DESC"]],
+  })
+  const itemCount = books.count;
+  const pageCount = Math.ceil(books.count / req.query.limit);
+  res.render("books/index", { 
+    books: books.rows, 
+    pageCount,
+    itemCount,
+    pages: paginate.getArrayPages(req)(3, pageCount, req.query.page),
+    title: "SQL Library" });
 }));
 
 router.get('/new', asyncHandler(async (req,res) => {

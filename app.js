@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var paginate = require('express-paginate');
 
 var routes = require('./routes/index');
 var books = require('./routes/books');
@@ -13,6 +14,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(paginate.middleware(10, 50));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -36,6 +38,12 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.all(function(req, res, next) {
+  // set default or minimum is 10 (as it was prior to v0.2.0)
+  if (req.query.limit <= 10) req.query.limit = 10;
+  next();
 });
 
 module.exports = app;

@@ -1,6 +1,22 @@
 body {
-  padding: 10px 50px 50px;
+  padding: 0px 20px;
   font: 18px "Garamond", serif;
+}
+
+.container{
+  margin-left: 100px;
+}
+
+.background{
+  position: absolute;
+  margin-left: 900px;
+  margin-top: 500px;
+  width: auto;
+  height: auto;
+  padding: 0px;
+  z-index: -1;
+  transform: scaleX(-1);
+  opacity: 1.0;
 }
 
 a {
@@ -38,7 +54,7 @@ input[type=submit] {
 }
 
   a.button:hover, input[type=submit]:hover {
-    background-color: #01b189;
+    background-color: #2b5e52;
   }
 
 p {
@@ -50,6 +66,14 @@ ul {
   list-style-type: none;
   margin-bottom: 10px;
   line-height: 1.3em;
+}
+
+h1{
+  text-align: center;
+}
+
+.index-title{
+  text-align: left;
 }
 
 h2 {
@@ -98,4 +122,21 @@ input[type=text] {
 
 .error {
   color: rgb(236, 15, 15);
+}
+
+.pag{
+  position: absolute;
+}
+
+.btn-default{
+  color: white;
+  background-color: #01b189;
+  border: solid 1px;
+  border-radius: 5%;
+  padding: 10px;
+}
+
+.btn-default:hover{
+  color: white;
+  background-color: #2b5e52;
 }
