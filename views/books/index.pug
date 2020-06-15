@@ -10,7 +10,7 @@ block content
       a.button(href="/books/new") Create New Book
   br
   p
-    table 
+    table.table
       thead
         tr
           th Title
@@ -25,7 +25,7 @@ block content
             td #{book.author}
             td #{book.genre}
             td #{book.year}
-  p.pag
+  p.pag Pages:
     if paginate.hasPreviousPages || paginate.hasNextPages(pageCount)
       if pages
         each page in pages
