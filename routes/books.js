@@ -21,8 +21,8 @@ function asyncHandler(cb){
 // Add in search functionality
 
 router.post('/search', asyncHandler(async(req, res) => {
-  let search = false;
-  if(search === true){
+  search = true;
+  if(search){
     const books = await Book.findAll({
       where: {
         [Op.or]: {
@@ -43,7 +43,7 @@ router.post('/search', asyncHandler(async(req, res) => {
     })
     res.render("books/search", { books, title: "SQL Library" })
   } else {
-    res.render("books/book-not-found", { title: " SQL Library"})
+    res.render("books/book-not-found", {title: " SQL Library"})
   }
 }));
 
@@ -66,8 +66,10 @@ router.get('/', asyncHandler(async (req, res) => {
     title: "SQL Library" });
 }));
 
+/* Renders the Add New Book page. */
+
 router.get('/new', asyncHandler(async (req,res) => {
-  res.render("books/new-book", {book: {}})
+  res.render("books/new-book", {book: {}, title:"SQL Library"})
 }));
 
 
@@ -77,11 +79,15 @@ router.post('/new', asyncHandler(async (req, res) => {
   let book;
   try {
     book = await Book.create(req.body);
-    res.redirect("/books");
+    res.redirect("/books", {title:"SQL Library"});
   } catch (error) {
     if(error.name === "SequelizeValidationError") { // checking the error
       book = await Book.build(req.body);
-      res.render("books/new-book", { book, errors: error.errors, })
+      res.render("books/new-book", { 
+        book, 
+        title: "SQL Library",
+        errors: error.errors
+       })
     } else {
       throw error;
     }  
@@ -93,7 +99,7 @@ router.post('/new', asyncHandler(async (req, res) => {
 router.get("/:id", asyncHandler(async (req, res) => {
   const book = await Book.findByPk(req.params.id);
   if(book) {
-    res.render("books/update-book", { book }); 
+    res.render("books/update-book", { book, title:"SQL Library" }); 
   } else {
     res.render("books/page-not-found");
   }
