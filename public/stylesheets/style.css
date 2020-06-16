@@ -34,13 +34,12 @@ table.table{
 a {
   color: #019875;
   text-decoration: none;
-  font-weight: bold;
   transition: 0.4s;
 }
 
-  a:hover {
-    color: black;
-  }
+  /* a:hover {
+    background-color: rgb(159, 176, 185);
+  } */
 
 
 
@@ -146,11 +145,16 @@ thead.table-head{
 
 tr {
   min-height: 60px;
-  
+  border: none;
 }
 
 tr:nth-child(2n) {
   background: #ffffff;
+}
+
+tr:hover{
+  background-color: #c1c9ec;
+  transition: 0.2s;
 }
 
 td {
