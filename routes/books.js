@@ -21,8 +21,8 @@ function asyncHandler(cb){
 // Add in search functionality
 
 router.post('/search', asyncHandler(async(req, res) => {
-  search = false;
-  if(search === true){
+  search = true;
+  if(search){
     const books = await Book.findAll({
       where: {
         [Op.or]: {
@@ -43,7 +43,7 @@ router.post('/search', asyncHandler(async(req, res) => {
     })
     res.render("books/search", { books, title: "SQL Library" })
   } else {
-    res.render("books/book-not-found", {title: " SQL Library"})
+    res.render("books/book-not-found")
   }
 }));
 
