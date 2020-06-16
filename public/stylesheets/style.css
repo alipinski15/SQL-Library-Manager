@@ -41,6 +41,9 @@ a {
     background-color: rgb(159, 176, 185);
   } */
 
+  div.not-found{
+    margin-top: 30%;
+  }
 
 
 a.button, input[type=submit] {
@@ -134,7 +137,7 @@ th {
 }
 
 thead.table-head{
-  height: 10px;
+  height: 20px;
   color: white;
   background-color: #7989cf;
 }
