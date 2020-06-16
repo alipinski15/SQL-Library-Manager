@@ -1,6 +1,7 @@
 body {
   padding: 40px 20px;
-  font: 18px "Garamond", serif;
+  font: 18px 'IBM Plex Sans', sans-serif;
+  /* font: 18px "Garamond", serif; */
   
 }
 

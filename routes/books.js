@@ -41,7 +41,7 @@ router.post('/search', asyncHandler(async(req, res) => {
         }
       }
     })
-    res.render("books/search", { books, title: "SQL Library" })
+    res.render("books/search", { books, title: "SQL Library Application" })
   } else {
     res.render("books/book-not-found")
   }
@@ -63,13 +63,13 @@ router.get('/', asyncHandler(async (req, res) => {
     pageCount,
     itemCount,
     pages: paginate.getArrayPages(req)(3, pageCount, req.query.page),
-    title: "SQL Library" });
+    title: "SQL Library Application" });
 }));
 
 /* Renders the Add New Book page. */
 
 router.get('/new', asyncHandler(async (req,res) => {
-  res.render("books/new-book", {book: {}, title:"SQL Library"})
+  res.render("books/new-book", {book: {}, title:"SQL Library Application"})
 }));
 
 
@@ -98,7 +98,7 @@ router.post('/new', asyncHandler(async (req, res) => {
 router.get("/:id", asyncHandler(async (req, res) => {
   const book = await Book.findByPk(req.params.id);
   if(book) {
-    res.render("books/update-book", { book, title:"SQL Library" }); 
+    res.render("books/update-book", { book, title:"SQL Library Application" }); 
   } else {
     res.render("books/page-not-found");
   }
