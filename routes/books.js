@@ -43,7 +43,7 @@ router.post('/search', asyncHandler(async(req, res) => {
     })
     res.render("books/search", { books, title: "SQL Library Application" })
   } else {
-    res.render("books/book-not-found")
+    res.render("books/book-not-found", {title: "SQL Library Application"})
   }
 }));
 
