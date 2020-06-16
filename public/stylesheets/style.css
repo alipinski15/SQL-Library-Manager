@@ -1,6 +1,7 @@
 body {
-  padding: 0px 20px;
+  padding: 40px 20px;
   font: 18px "Garamond", serif;
+  
 }
 
 .container{
@@ -10,21 +11,25 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.background{
+img.background{
   position: absolute;
-  margin-left: 900px;
-  margin-top: 500px;
+  margin-top: 100px;
+  margin-left: 800px;
   width: auto;
-  height: auto;
+  height: 85%;
   padding: 0px;
   z-index: -1;
   transform: scaleX(-1);
-  opacity: 1.0;
+  opacity: 0.7;
 }
 
-.table{
-  background-color: rgb(242, 247, 242);
+table.table{
+  background-color: rgb(213, 225, 248);
+  width: 1000px;
+
 }
+
+
 
 a {
   color: #019875;
@@ -37,13 +42,22 @@ a {
     color: black;
   }
 
-.search input{
-  margin-left: 0px;
-}
+
 
 a.button, input[type=submit] {
   color: white;
-  background: #019875;
+  background: #475aac;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 10px 14px 12px;
+  font-size: 14px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+}
+
+a.button-create{
+  color: white;
+  background: #475aac;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
   font-size: 14px;
@@ -51,17 +65,43 @@ a.button, input[type=submit] {
   cursor: pointer;
 }
 
-form a.button, input[type=submit] {
+a.button-create:hover {
+  background-color: #687cb4;
+}
+
+/* form a.button, input[type=submit] {
   margin-left: 10px;
   transition: 0.4s;
+} */
+
+
+form.form input.search {
+  margin-left: 550px;
+  display: inline-block;
+  padding: 10px 14px 12px;
+  border-style: solid;
+  border-color: lightsteelblue;
+  border-width: 1px;
+  
 }
 
-input[type=submit] {
-  border: 0;
+form.form input.search-button {
+  margin-left: 10px;
+  padding: 10px 14px 12px;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  display: inline-block;
+  border: none;
 }
+
+/* input[type=submit] {
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+} */
 
   a.button:hover, input[type=submit]:hover {
-    background-color: #2b5e52;
+    background-color: #687cb4;
   }
 
 p {
@@ -88,22 +128,37 @@ h2 {
   padding-top: 20px;
 }
 
+h3{
+  color: #5464ac;
+}
+
 th {
-  border-bottom: 2px solid #7989cf;
-  text-align: left;
+  /* border-bottom: 2px solid #7989cf; */
+  text-align: center;
   padding: 5px 20px 5px 10px;
 }
 
+thead.table-head{
+  height: 10px;
+  color: white;
+  background-color: #7989cf;
+}
+
 tr {
-  min-height: 50px;
+  min-height: 60px;
+  
 }
 
 tr:nth-child(2n) {
-  background: #E7E7E7;
+  background: #ffffff;
 }
 
 td {
   padding: 5px 20px 5px 10px;
+}
+
+td a{
+  color: #5464ac;
 }
 
 label {
@@ -133,7 +188,7 @@ input[type=text] {
 
 .pag{
   margin-right: 10px;
-  color: #019875;
+  color: #475aac;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
   font-size: 14px;
@@ -143,7 +198,7 @@ input[type=text] {
 .btn.btn-default{
   margin-left: 5px;
   color: white;
-  background-color: #01b189;
+  background-color: #475aac;
   border: solid 1px;
   border-radius: 10%;
   padding: 10px;
@@ -151,6 +206,6 @@ input[type=text] {
 
 .btn.btn-default:hover{
   color: white;
-  background-color: #2b5e52;
+  background-color: #7989cf;
 }
 

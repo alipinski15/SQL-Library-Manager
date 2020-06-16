@@ -1,17 +1,16 @@
 extends ../layout
 
 block content
-  h1.index-title Books
+  h1 Books
   p
-    form(action="/books/search" class="search-form" method="post")
-      input(name="search" type="search" placeholder="Title, Author etc...")
-      input.search(type="submit" value="Search")
-    p
-      a.button(href="/books/new") Create New Book
+    form.form(action="/books/search"  method="post")
+      a.button-create(href="/books/new") Create New Book
+      input.search(name="search" type="search" placeholder="Title, Author etc...")
+      input.search-button(type="submit" value="Search")
   br
   p
     table.table
-      thead
+      thead.table-head
         tr
           th Title
           th Author
