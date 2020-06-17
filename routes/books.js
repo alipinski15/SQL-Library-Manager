@@ -52,18 +52,22 @@ router.post('/search', asyncHandler(async(req, res) => {
 
 router.get('/', asyncHandler(async (req, res) => {
   const books = await Book.findAndCountAll({
-    limit: req.query.limit,
-    offset: req.skip,
-    order: [["title", "DESC"]],
-  })
-  const itemCount = books.count;
-  const pageCount = Math.ceil(books.count / req.query.limit);
-  res.render("books/index", { 
-    books: books.rows, 
-    pageCount,
-    itemCount,
-    pages: paginate.getArrayPages(req)(3, pageCount, req.query.page),
-    title: "SQL Library Application" });
+      limit: req.query.limit,
+      offset: req.skip,
+      order: [["title", "DESC"]],
+    })
+  if (books){
+    const itemCount = books.count;
+    const pageCount = Math.ceil(books.count / req.query.limit);
+    res.render("books/index", { 
+      books: books.rows, 
+      pageCount,
+      itemCount,
+      pages: paginate.getArrayPages(req)(3, pageCount, req.query.page),
+      title: "SQL Library Application" });
+    } else {
+      res.render("books/error")
+    }
 }));
 
 /* Renders the Add New Book page. */
@@ -96,11 +100,22 @@ router.post('/new', asyncHandler(async (req, res) => {
 /* Retrieves book for updating or deleting */
 
 router.get("/:id", asyncHandler(async (req, res) => {
-  const book = await Book.findByPk(req.params.id);
-  if(book) {
-    res.render("books/update-book", { book, title:"SQL Library Application" }); 
-  } else {
-    res.render("books/page-not-found");
+  let book;
+  try {
+    book = await Book.findByPk(req.params.id);
+    if(book) {
+      res.render("books/update-book", { book, title:"SQL Library Application" }); 
+    } else {
+      res.render("books/page-not-found");
+    }
+  } catch (error) {
+    if(error.name === "SequelizeValidationError") {
+      book = await Book.build(req.body);
+      book.id = req.params.id;
+      res.render("books/error", { book, errors:error.error})
+    } else {
+      throw error;
+    }
   }
 }));
 
@@ -120,7 +135,7 @@ router.post('/:id', asyncHandler(async (req, res) => {
     if(error.name === "SequelizeValidationError") {
       book = await Book.build(req.body);
       book.id = req.params.id; // make sure correct book gets updated
-      res.render("books/update-book", { book, errors: error.errors })
+      res.render("books/update-book", { book, errors: error.error })
     } else {
       throw error;
     }
