@@ -13,8 +13,7 @@ function asyncHandler(cb){
     try {
       await cb(req, res, next)
     } catch(error){
-      res.status(500).send(error);
-      res.render("books/error")
+      return next(error)
     }
   }
 }
@@ -67,7 +66,7 @@ router.get('/', asyncHandler(async (req, res) => {
       pages: paginate.getArrayPages(req)(3, pageCount, req.query.page),
       title: "SQL Library Application" });
     } else {
-      res.render("books/page-not-found")
+      throw error;
     }
 }));
 
@@ -101,12 +100,12 @@ router.post('/new', asyncHandler(async (req, res) => {
 /* Retrieves book for updating or deleting */
 
 router.get("/:id", asyncHandler(async (req, res) => {
-  let book = await Book.findByPk(req.params.id);
-    if(book) {
-      res.render("books/update-book", { book, title:"SQL Library Application" }); 
-    } else {
-      res.render("books/error")
-    }
+  const book = await Book.findByPk(req.params.id);
+  if(book) {
+    res.render("books/update-book", { book, title:"SQL Library Application" }); 
+  } else {
+    throw error;
+  }
 }));
 
 /* Update a book. */
@@ -117,16 +116,15 @@ router.post('/:id', asyncHandler(async (req, res) => {
     book = await Book.findByPk(req.params.id);
     if(book) {
       await book.update(req.body);
-      res.redirect("/books"); 
+      res.redirect("/books/update-book", { book, title: "SQL Library Application"}); 
     } else {
-      res.status(500)
-      res.render("books/error");
+      throw error;
     }
   } catch (error) {
     if(error.name === "SequelizeValidationError") {
       book = await Book.build(req.body);
       book.id = req.params.id; // make sure correct book gets updated
-      res.render("books/update-book", { book, errors: error.error })
+      res.render("books/update-book", { book, errors: error.errors })
     } else {
       throw error;
     }
@@ -141,7 +139,7 @@ router.post('/:id/delete', asyncHandler(async (req ,res) => {
     await book.destroy();
     res.redirect("/books");
   } else {
-    res.render("books/page-not-found");
+    throw error;
   }
 }));
 

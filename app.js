@@ -26,22 +26,26 @@ app.use('/books', books);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  const err = new Error("books/page-not-found")
+  err.status = 404;
+  next(err)
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  if(err.status === 404) {
+    res.render('books/page-not-found');
+  } else {
+    res.render('books/book-not-found');
+  }
 });
 
 app.all(function(req, res, next) {
-  // set default or minimum is 10 (as it was prior to v0.2.0)
+  // set default or minimum is 10 
   if (req.query.limit <= 10) req.query.limit = 10;
   next();
 });
