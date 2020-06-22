@@ -5,11 +5,11 @@ html
     title= title
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Bree+Serif|Open+Sans:400,700')
     link(rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap")
+    link(rel='stylesheet', href='/stylesheets/reset.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    img.background(src="/images/books.png")
-    header
+    //- img.background(src="/images/books.png")
+    header#header
       h1= title
-      hr
       div.container
         block content

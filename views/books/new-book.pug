@@ -1,11 +1,11 @@
 extends ../layout
 
 block content
-  h1 Add New Book
 
   include error
 
-  form(action="/books/new" method="post")
+  form.new(action="/books/new" method="post")
+    h2 Add New Book
     p
       label(for="title") Title
       input(name="title" type="text" id="title" value=book.title)

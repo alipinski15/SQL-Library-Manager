@@ -1,30 +1,29 @@
 extends ../layout
 
 block content
-  h1 Books
-  p
-    form.form(action="/books/search"  method="post")
+  div.form
+    form.form-search(action="/books/search"  method="post")
       a.button-create(href="/books/new") Create New Book
       input.search(name="search" type="search" placeholder="Title, Author etc...")
       input.search-button(type="submit" value="Search")
-  br
-  p
-    table.table
-      thead.table-head
-        tr
-          th Title
-          th Author
-          th Genre
-          th Year
-      tbody
-        each book in books
+  main#main-content
+    if books.length > 0
+      table
+        thead
           tr
-            td
-              a(href="/books/" + book.id) #{book.title}
-            td #{book.author}
-            td #{book.genre}
-            td #{book.year}
-  p.pag Pages:
+            th Title
+            th Author
+            th Genre
+            th Year
+        tbody
+          each book in books
+            tr
+              td
+                a(href="/books/" + book.id) #{book.title}
+              td #{book.author}
+              td #{book.genre}
+              td #{book.year}
+  p.pag 
     if paginate.hasPreviousPages || paginate.hasNextPages(pageCount)
       if pages
         each page in pages

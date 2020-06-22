@@ -38,9 +38,9 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   if(err.status === 404) {
-    res.render('books/page-not-found');
+    res.render('books/page-not-found', {title:"SQL Library Application"});
   } else {
-    res.render('books/book-not-found');
+    res.render('books/problem', {title:"SQL Library Application"});
   }
 });
 
