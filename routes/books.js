@@ -54,7 +54,7 @@ router.get('/', asyncHandler(async (req, res) => {
   const books = await Book.findAndCountAll({
       limit: req.query.limit,
       offset: req.skip,
-      order: [["title", "DESC"]],
+      order: [["author", "ASC"]],
     })
   if (books){
     const itemCount = books.count;

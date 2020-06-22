@@ -2,10 +2,9 @@ body {
   display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 5fr;
-	padding: 10px 0 50px;
-  padding: 10px 50px 50px;
+	
+  /* padding: 10px 50px 50px; */
   font: 18px 'IBM Plex Sans', sans-serif;
-  background-color: #4e5353;
   /* font: 18px "Garamond", serif; */
   
 }
@@ -23,7 +22,7 @@ body {
 }
 
 header{
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 main {
@@ -35,16 +34,15 @@ main {
 
 
 
-img.background{
+.background{
   position: absolute;
-  margin-top: 100px;
-  margin-left: 800px;
-  width: auto;
-  height: 85%;
-  padding: 0px;
+  width: 100%;
+  height: 1000px;
+  padding: none;
   z-index: -1;
-  transform: scaleX(-1);
   opacity: 0.7;
+  background: url(/images/books.png);
+  background-size: cover;
 }
 
 table{
@@ -150,6 +148,10 @@ form.update{
   background-color: #162c54;
 }
 
+form.update input[type=submit]{
+  padding: none;
+}
+
 form.form-search input.search {
   margin-left: 520px;
   display: inline-block;
@@ -170,6 +172,11 @@ form.form-search input.search-button {
 }
 
 form.new label{
+  color: white;
+  padding-left: 20px;
+}
+
+form.update label{
   color: white;
   padding-left: 20px;
 }
@@ -204,8 +211,8 @@ h1{
 }
 
 #header h1{
-  color: white;
-  margin-top: 100px;
+  color: #005477;
+  margin-top: 50px;
   font-size: 36px;
 }
 
