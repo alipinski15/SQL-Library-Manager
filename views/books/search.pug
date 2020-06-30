@@ -1,9 +1,8 @@
 extends ../layout
 
 block content
-  h1 Results
-  p
-    form.form(action="/books/search" class="search-form" method="post")
+  div.form
+    form.form-search(action="/books/search" class="search-form" method="post")
       a.button-create(href="/books/") Show All Books
       input.search(name="search" type="search" placeholder="Title, Author etc...")
       input.search-button(type="submit" value="Search")
